@@ -11,19 +11,19 @@ ENV appDir /var/www/app/current
 RUN apt-get update
 
 RUN apt-get install -y -q --no-install-recommends \
-    apt-transport-https \
-    build-essential \
-    ca-certificates \
-    curl \
-    g++ \
-    gcc \
-    git \
-    make \
-    nginx \
-    sudo \
-    wget \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get -y autoclean
+  apt-transport-https \
+  build-essential \
+  ca-certificates \
+  curl \
+  g++ \
+  gcc \
+  git \
+  make \
+  nginx \
+  sudo \
+  wget \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get -y autoclean
 
 # Install openalpr
 RUN wget -O - http://deb.openalpr.com/openalpr.gpg.key | apt-key add -
@@ -35,14 +35,14 @@ RUN apt-get install -y -q python openalpr openalpr-daemon openalpr-utils libopen
 RUN ln /dev/null /dev/raw1394
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 5.1.0
+ENV NODE_VERSION 13.7.0
 
 # Install nvm with node and npm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash \
-    && source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
+  && source $NVM_DIR/nvm.sh \
+  && nvm install $NODE_VERSION \
+  && nvm alias default $NODE_VERSION \
+  && nvm use default
 
 # Set up our PATH correctly so we don't have to long-reference npm, node, &c.
 ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
